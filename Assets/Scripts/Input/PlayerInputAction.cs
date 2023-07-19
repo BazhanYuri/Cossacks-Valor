@@ -37,6 +37,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""af921056-51ad-4629-8168-bb7e0a30170c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""98cdf50a-a5d7-469c-9ee0-4d563b319938"",
@@ -132,6 +141,61 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""10dbdc3c-48c8-460c-9f5c-0f22efce0d6d"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""a7cd2bf0-b2a8-4768-af22-33c8c52249d9"",
+                    ""path"": ""<Mouse>/delta/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a1e11578-1843-4806-ac34-5c25989d7202"",
+                    ""path"": ""<Mouse>/delta/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""aa47ffff-2eeb-4e82-9cea-0fb3b5d80a43"",
+                    ""path"": ""<Mouse>/delta/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""4ba5493b-8ba9-4a77-8886-5a9b15c9fdb2"",
+                    ""path"": ""<Mouse>/delta/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -141,6 +205,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         // ActionMap
         m_ActionMap = asset.FindActionMap("ActionMap", throwIfNotFound: true);
         m_ActionMap_Movement = m_ActionMap.FindAction("Movement", throwIfNotFound: true);
+        m_ActionMap_Look = m_ActionMap.FindAction("Look", throwIfNotFound: true);
         m_ActionMap_Inventory = m_ActionMap.FindAction("Inventory", throwIfNotFound: true);
         m_ActionMap_Interact = m_ActionMap.FindAction("Interact", throwIfNotFound: true);
     }
@@ -203,6 +268,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_ActionMap;
     private IActionMapActions m_ActionMapActionsCallbackInterface;
     private readonly InputAction m_ActionMap_Movement;
+    private readonly InputAction m_ActionMap_Look;
     private readonly InputAction m_ActionMap_Inventory;
     private readonly InputAction m_ActionMap_Interact;
     public struct ActionMapActions
@@ -210,6 +276,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         private @PlayerInputAction m_Wrapper;
         public ActionMapActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_ActionMap_Movement;
+        public InputAction @Look => m_Wrapper.m_ActionMap_Look;
         public InputAction @Inventory => m_Wrapper.m_ActionMap_Inventory;
         public InputAction @Interact => m_Wrapper.m_ActionMap_Interact;
         public InputActionMap Get() { return m_Wrapper.m_ActionMap; }
@@ -224,6 +291,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnMovement;
+                @Look.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnLook;
                 @Inventory.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnInventory;
@@ -237,6 +307,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
@@ -250,6 +323,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     public interface IActionMapActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }

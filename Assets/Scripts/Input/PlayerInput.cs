@@ -9,6 +9,7 @@ public class PlayerInput : IPlayerInput, IInitializable
 
 
     public event Action<Vector2> PlayerMoved;
+    public event Action<Vector2> PlayerLooked;
     public event Action InventoryButtonPressed;
     public event Action InteractButtonPressed;
 
@@ -18,6 +19,10 @@ public class PlayerInput : IPlayerInput, IInitializable
         _inputActions.Enable();
         _inputActions.ActionMap.Movement.performed += OnMoved;
         _inputActions.ActionMap.Movement.canceled += OnMoved;
+
+        _inputActions.ActionMap.Look.performed += OnLooked;
+        _inputActions.ActionMap.Look.canceled += OnLooked;
+
         _inputActions.ActionMap.Inventory.started += InvokeInventoryPressed;
         _inputActions.ActionMap.Interact.started += InvokeInteractButtonPressed;
     }
@@ -28,10 +33,19 @@ public class PlayerInput : IPlayerInput, IInitializable
 
         InvokePlayerMoved(input);
     }
+    private void OnLooked(InputAction.CallbackContext context)
+    {
+        Vector2 input = context.ReadValue<Vector2>();
 
+        InvokePlayerLooked(input);
+    }
     public void InvokePlayerMoved(Vector2 value)
     {
         PlayerMoved?.Invoke(value);
+    }
+    public void InvokePlayerLooked(Vector2 value)
+    {
+        PlayerLooked?.Invoke(value);
     }
 
     public void InvokeInventoryPressed(InputAction.CallbackContext context)
