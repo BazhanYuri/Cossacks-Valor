@@ -62,6 +62,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""cbe7897c-1525-4889-8015-877b1364ae2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,17 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c22d9bd0-4e5a-4d7c-8398-10adae9d5634"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +228,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_ActionMap_Look = m_ActionMap.FindAction("Look", throwIfNotFound: true);
         m_ActionMap_Inventory = m_ActionMap.FindAction("Inventory", throwIfNotFound: true);
         m_ActionMap_Interact = m_ActionMap.FindAction("Interact", throwIfNotFound: true);
+        m_ActionMap_Shoot = m_ActionMap.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -271,6 +292,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_ActionMap_Look;
     private readonly InputAction m_ActionMap_Inventory;
     private readonly InputAction m_ActionMap_Interact;
+    private readonly InputAction m_ActionMap_Shoot;
     public struct ActionMapActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -279,6 +301,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_ActionMap_Look;
         public InputAction @Inventory => m_Wrapper.m_ActionMap_Inventory;
         public InputAction @Interact => m_Wrapper.m_ActionMap_Interact;
+        public InputAction @Shoot => m_Wrapper.m_ActionMap_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_ActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -300,6 +323,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnInteract;
+                @Shoot.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_ActionMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -316,6 +342,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -326,5 +355,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

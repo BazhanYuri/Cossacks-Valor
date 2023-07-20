@@ -40,10 +40,15 @@ public class PlayerMovement : IPlayerMovement, IInitializable, ITickable
 
     public void Tick()
     {
+        Move();
+
+        PlayerMoved?.Invoke(_movementVector);
+    }
+    private void Move()
+    {
         Vector3 moveVector = _player.transform.TransformDirection(
-        new Vector3(_movementVector.x * _playerControlsConfig.sideSpeed, 0, _movementVector.y * _playerControlsConfig.forwardSpeed));
+        new Vector3(_movementVector.x * _playerControlsConfig.sideSpeed, _player.Rigidbody.velocity.y, _movementVector.y * _playerControlsConfig.forwardSpeed));
 
         _player.Rigidbody.velocity = moveVector;
-        PlayerMoved?.Invoke(_movementVector);
     }
 }

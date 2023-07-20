@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c046ebfe9607c346b9be51188c8fa18, type: 3}
-  m_Name: PlayerControlsConfig
+  m_Script: {fileID: 11500000, guid: a12d784affb258842b70c1ec18414787, type: 3}
+  m_Name: HotWeaponConfig
   m_EditorClassIdentifier: 
-  sideSpeed: 4
-  forwardSpeed: 6
-  mouseHorizontalSensitivity: 1
-  mouseVerticalSensitivity: 0.5
-  mouseVerticalClamp:
-    min: -0.45
-    max: 0.9
+  bulletPrefab: {fileID: 7462223817796864028, guid: 98cfa4bf77507fd43a49e605edbba4c2,
+    type: 3}
+  damage: 0
+  force: 100
+  reloadSpeed: 2

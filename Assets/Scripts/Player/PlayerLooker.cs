@@ -37,7 +37,6 @@ public class PlayerLooker : IPlayerLooker, IInitializable, ITickable
     {
         HorizontalLook();
         VerticalLook();
-        ClampVerticalRotation();
     }
     private void HorizontalLook()
     {
@@ -47,20 +46,17 @@ public class PlayerLooker : IPlayerLooker, IInitializable, ITickable
     private void VerticalLook()
     {
         _lookValue.y = _lookValue.y * _playerControlsConfig.mouseVerticalSensitivity;
+
         _player.Camera.transform.Rotate(-_lookValue.y * Time.smoothDeltaTime * 50, 0, 0);
+
+        ClampVerticalRotation();
     }
     private void ClampVerticalRotation()
     {
-        Vector3 currentRotation = _player.Camera.transform.localRotation.eulerAngles;
-        if (currentRotation.x < _playerControlsConfig.mouseVerticalClamp.min)
-        {
-            currentRotation.x = _playerControlsConfig.mouseVerticalClamp.min;
-        }
-        if (currentRotation.x > _playerControlsConfig.mouseVerticalClamp.max)
-        {
-            currentRotation.x = _playerControlsConfig.mouseVerticalClamp.max;
-        }
-        _player.Camera.transform.localRotation = Quaternion.Euler(currentRotation);
+        Quaternion newAngle = _player.Camera.transform.localRotation;
+        newAngle.x = _playerControlsConfig.mouseVerticalClamp.Clamp(newAngle.x);
+
+        _player.Camera.transform.localRotation = newAngle;
     }
     
 }

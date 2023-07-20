@@ -12,6 +12,7 @@ public class PlayerInput : IPlayerInput, IInitializable
     public event Action<Vector2> PlayerLooked;
     public event Action InventoryButtonPressed;
     public event Action InteractButtonPressed;
+    public event Action ShootButtonPressed;
 
     public void Initialize()
     {
@@ -25,6 +26,7 @@ public class PlayerInput : IPlayerInput, IInitializable
 
         _inputActions.ActionMap.Inventory.started += InvokeInventoryPressed;
         _inputActions.ActionMap.Interact.started += InvokeInteractButtonPressed;
+        _inputActions.ActionMap.Shoot.started += InvokeShootButtonPressed;
     }
 
     private void OnMoved(InputAction.CallbackContext context)
@@ -56,6 +58,10 @@ public class PlayerInput : IPlayerInput, IInitializable
     public void InvokeInteractButtonPressed(InputAction.CallbackContext context)
     {
         InteractButtonPressed?.Invoke();
+    }
+    public void InvokeShootButtonPressed(InputAction.CallbackContext context)
+    {
+        ShootButtonPressed?.Invoke();
     }
 }
 

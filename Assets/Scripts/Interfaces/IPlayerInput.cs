@@ -16,8 +16,13 @@ public interface ILookerInput
 
     void InvokePlayerLooked(Vector2 value);
 }
+public interface IShootInput
+{
+    public event Action ShootButtonPressed;
+    void InvokeShootButtonPressed(InputAction.CallbackContext context);
+}
 
-public interface IPlayerInput : IMovementInput, ILookerInput
+public interface IPlayerInput : IMovementInput, ILookerInput, IShootInput
 {
     public event Action InventoryButtonPressed;
     public event Action InteractButtonPressed;
