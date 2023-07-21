@@ -8,6 +8,6 @@ public class HotWeaponConfig : ScriptableObject
     public Bullet bulletPrefab;
     public int damage;
     public int force;
-    public int bulletsCount;
-    public float reloadSpeed;
+    public int maxBulletsCount;
+    public float reloadTime;
 }

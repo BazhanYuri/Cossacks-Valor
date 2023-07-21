@@ -13,6 +13,7 @@ public class PlayerInput : IPlayerInput, IInitializable
     public event Action InventoryButtonPressed;
     public event Action InteractButtonPressed;
     public event Action ShootButtonPressed;
+    public event Action ReloadButtonPressed;
 
     public void Initialize()
     {
@@ -27,6 +28,7 @@ public class PlayerInput : IPlayerInput, IInitializable
         _inputActions.ActionMap.Inventory.started += InvokeInventoryPressed;
         _inputActions.ActionMap.Interact.started += InvokeInteractButtonPressed;
         _inputActions.ActionMap.Shoot.started += InvokeShootButtonPressed;
+        _inputActions.ActionMap.Reload.started += InvokeReloadButtonPressed;
     }
 
     private void OnMoved(InputAction.CallbackContext context)
@@ -62,6 +64,10 @@ public class PlayerInput : IPlayerInput, IInitializable
     public void InvokeShootButtonPressed(InputAction.CallbackContext context)
     {
         ShootButtonPressed?.Invoke();
+    }
+    public void InvokeReloadButtonPressed(InputAction.CallbackContext context)
+    {
+        ReloadButtonPressed?.Invoke();
     }
 }
 

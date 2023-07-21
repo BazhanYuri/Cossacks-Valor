@@ -19,7 +19,9 @@ public interface ILookerInput
 public interface IShootInput
 {
     public event Action ShootButtonPressed;
+    public event Action ReloadButtonPressed;
     void InvokeShootButtonPressed(InputAction.CallbackContext context);
+    void InvokeReloadButtonPressed(InputAction.CallbackContext context);
 }
 
 public interface IPlayerInput : IMovementInput, ILookerInput, IShootInput

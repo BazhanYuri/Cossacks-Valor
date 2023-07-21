@@ -19,6 +19,7 @@ public class PlayerWeaponHandler : IPlayerWeaponHandler, IInitializable
     public void Initialize()
     {
         _playerInput.ShootButtonPressed += PerformAttack;
+        _playerInput.ReloadButtonPressed += ReloadWeapon;
 
         EquipWeapon(_currentWeapon);
     }
@@ -33,11 +34,15 @@ public class PlayerWeaponHandler : IPlayerWeaponHandler, IInitializable
         _currentWeapon.Transform.SetParent(_player.Hand);
         _currentWeapon.Transform.localPosition = Vector3.zero;
     }
+    private void ReloadWeapon()
+    {
+        if (_currentWeapon is IHotWeapon hotWeapon)
+        {
+            hotWeapon.Reload();
+        }
+    }
     private void PerformAttack()
     {
-        Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
-        Vector3 screenCenterWorld = Camera.main.ScreenToWorldPoint(screenCenter);
-
         _currentWeapon.Attack();
     }
 }
