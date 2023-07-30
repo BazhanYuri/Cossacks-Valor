@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Item", menuName = "Data/Item")]
 public class Item : ScriptableObject
 {
-    public float _weight;
+    public float weight;
+    public int width;
+    public int height;
 }
 

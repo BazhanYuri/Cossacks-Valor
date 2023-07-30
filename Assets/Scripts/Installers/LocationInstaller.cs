@@ -10,6 +10,9 @@ public class LocationInstaller : MonoInstaller
     [SerializeField] private HotWeapon _hotWeaponPrefab;
     [Header("Configs")]
     [SerializeField] private PlayerControlsConfig _playerControlsConfig;
+    [Header ("UI")]
+    [SerializeField] private InventoryView _inventoryViewPrefab;
+
 
     public override void InstallBindings()
     {
@@ -30,6 +33,7 @@ public class LocationInstaller : MonoInstaller
     private void BindFactories()
     {
         Container.BindFactory<Player, PlayerFactory>().FromComponentInNewPrefab(_playerPrefab);
+        Container.BindFactory<InventoryView, InventoryFactory>().FromComponentInNewPrefab(_inventoryViewPrefab);
     }
     private void BindPlayer()
     {

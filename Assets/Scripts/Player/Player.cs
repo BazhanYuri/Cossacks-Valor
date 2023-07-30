@@ -16,9 +16,11 @@ public class Player : MonoBehaviour
     private IPlayerLooker _playerLooker;
     private IPlayerInput _playerInput;
 
+
     public Rigidbody Rigidbody { get => _rigidbody;}
     public Camera Camera { get => _camera;}
     public Transform Hand { get => _hand;}
+
 
     [Inject]
     public void Construct(IPlayerMovement playerMovement, IPlayerLooker playerLooker, IPlayerInput playerInput, IPlayerWeaponHandler playerWeaponHandler)
