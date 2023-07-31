@@ -31,17 +31,14 @@ public class PlayerInput : IPlayerInput, IInitializable
         _inputActions.ActionMap.Reload.started += InvokeReloadButtonPressed;
     }
 
-    private void OnMoved(InputAction.CallbackContext context)
+    
+    public void ShowMouse()
     {
-        Vector2 input = context.ReadValue<Vector2>();
-
-        InvokePlayerMoved(input);
+        UnBlockMouse();
     }
-    private void OnLooked(InputAction.CallbackContext context)
+    public void HideMouse()
     {
-        Vector2 input = context.ReadValue<Vector2>();
-
-        InvokePlayerLooked(input);
+        BlockMouse();
     }
     public void InvokePlayerMoved(Vector2 value)
     {
@@ -68,6 +65,28 @@ public class PlayerInput : IPlayerInput, IInitializable
     public void InvokeReloadButtonPressed(InputAction.CallbackContext context)
     {
         ReloadButtonPressed?.Invoke();
+    }
+    private void OnMoved(InputAction.CallbackContext context)
+    {
+        Vector2 input = context.ReadValue<Vector2>();
+
+        InvokePlayerMoved(input);
+    }
+    private void OnLooked(InputAction.CallbackContext context)
+    {
+        Vector2 input = context.ReadValue<Vector2>();
+
+        InvokePlayerLooked(input);
+    }
+    private void UnBlockMouse()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    private void BlockMouse()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
 

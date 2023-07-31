@@ -19,11 +19,12 @@ public class LocationInstaller : MonoInstaller
         BindConfigs();
         BindFactories();
         BindPlayer();
+        BindInventoryHolder();
         BindWeaponHandler();
         BindInput();
         BindMovement();
-
         BindWeapon();
+        BindUIBuilder();
     }
 
     private void BindConfigs()
@@ -38,6 +39,10 @@ public class LocationInstaller : MonoInstaller
     private void BindPlayer()
     {
         Container.BindInterfacesTo<PlayerFactory>().FromResolve();
+    }
+    private void BindInventoryHolder()
+    {
+        Container.BindInterfacesTo<InventoryHolder>().AsSingle();
     }
     private void BindWeaponHandler()
     {
@@ -55,6 +60,10 @@ public class LocationInstaller : MonoInstaller
     private void BindWeapon()
     {
         Container.BindInterfacesTo<HotWeapon>().FromComponentInNewPrefab(_hotWeaponPrefab).AsSingle();
+    }
+    private void BindUIBuilder()
+    {
+        Container.BindInterfacesTo<UIBuilder>().AsSingle();
     }
     
 }

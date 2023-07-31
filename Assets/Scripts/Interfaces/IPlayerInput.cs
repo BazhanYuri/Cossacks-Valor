@@ -28,6 +28,9 @@ public interface IPlayerInput : IMovementInput, ILookerInput, IShootInput
 {
     public event Action InventoryButtonPressed;
     public event Action InteractButtonPressed;
+
+    void ShowMouse();
+    void HideMouse();
     void InvokeInventoryPressed(InputAction.CallbackContext context);
     void InvokeInteractButtonPressed(InputAction.CallbackContext context);
 }

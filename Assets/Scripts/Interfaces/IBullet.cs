@@ -11,5 +11,5 @@ public interface IInventoryModel
 }
 public interface IUIBuilder
 {
-    void CreatePlayerInventory();
+    InventoryModel CreatePlayerInventory();
 }

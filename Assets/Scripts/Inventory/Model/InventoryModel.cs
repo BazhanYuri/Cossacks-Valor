@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class InventoryModel : IInventoryModel
+public class InventoryModel : IPlayerInventory
 {
     private InventoryView _inventoryView;
     
@@ -11,5 +11,10 @@ public class InventoryModel : IInventoryModel
     public InventoryModel(InventoryView inventoryView)
     {
         _inventoryView = inventoryView;
+    }
+
+    public void Close()
+    {
+        Object.Destroy(_inventoryView.gameObject);
     }
 }
