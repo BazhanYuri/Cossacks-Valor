@@ -26,6 +26,7 @@ public class InventoryFactory : PlaceholderFactory<InventoryView>
     {
         InventoryView inventoryView = base.Create();
         InventoryModel inventoryModel = new InventoryModel(inventoryView);
+        inventoryModel.Initialize();
 
         return inventoryModel;
     }
