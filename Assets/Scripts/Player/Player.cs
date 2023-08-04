@@ -5,6 +5,22 @@ using UnityEngine.InputSystem;
 using Zenject;
 
 
+public class PlayerHolder : IInitializable
+{
+    private PlayerFactory _factory;
+
+
+    [Inject]
+    public void Construct(PlayerFactory playerFactory)
+    {
+        _factory = playerFactory;
+    }
+
+    public void Initialize()
+    {
+        _factory.Create();
+    }
+}
 public class Player : MonoBehaviour
 {
     [SerializeField] private Camera _camera;

@@ -18,7 +18,7 @@ public class LocationInstaller : MonoInstaller
     {
         BindConfigs();
         BindFactories();
-        BindPlayer();
+        BindPlayerHolder();
         BindInventoryHolder();
         BindWeaponHandler();
         BindInput();
@@ -36,9 +36,9 @@ public class LocationInstaller : MonoInstaller
         Container.BindFactory<Player, PlayerFactory>().FromComponentInNewPrefab(_playerPrefab);
         Container.BindFactory<InventoryView, InventoryFactory>().FromComponentInNewPrefab(_inventoryViewPrefab);
     }
-    private void BindPlayer()
+    private void BindPlayerHolder()
     {
-        Container.BindInterfacesTo<PlayerFactory>().FromResolve();
+        Container.BindInterfacesTo<PlayerHolder>().AsSingle();
     }
     private void BindInventoryHolder()
     {

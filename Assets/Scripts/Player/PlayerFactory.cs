@@ -1,9 +1,5 @@
 using Zenject;
 
-public class PlayerFactory : PlaceholderFactory<Player>, IInitializable
+public class PlayerFactory : PlaceholderFactory<Player>
 {
-    public void Initialize()
-    {
-        Create();
-    }
 }
