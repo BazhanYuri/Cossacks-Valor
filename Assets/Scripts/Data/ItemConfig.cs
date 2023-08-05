@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Data/Item")]
@@ -10,4 +8,3 @@ public class ItemConfig : ScriptableObject
     public int width;
     public int height;
 }
-

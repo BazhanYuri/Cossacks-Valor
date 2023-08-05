@@ -1,35 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 
-
-public class InventoryItem
-{
-    private int _x;
-    private int _y;
-
-    public int X { get => _x; set => _x = value; }
-    public int Y { get => _y; set => _y = value; }
-
-    public InventoryItem(int x, int y)
-    {
-        x = _x;
-        y = _y;
-    }
-}
 public class InventoryModel : IPlayerInventory
 {
+    private IDatabase _database;
+    private IInventoryItemFactory _inventoryItemsFactory;
     private InventoryView _inventoryView;
-    
+    private PlayerInventoryConfig _playerInventoryConfig;
 
-    public InventoryModel(InventoryView inventoryView)
+    private InventoryItem[] _inventoryItems;
+
+
+    public InventoryModel(InventoryView inventoryView, IInventoryItemFactory inventoryItemsFactory, PlayerInventoryConfig playerInventoryConfig, IDatabase database)
     {
         _inventoryView = inventoryView;
+        _playerInventoryConfig = playerInventoryConfig;
+        _inventoryItemsFactory = inventoryItemsFactory;
+        _database = database;
     }
     public void Initialize()
     {
-        _inventoryView.CreateInventory(3, 5);
+        FillInventory();
+        _inventoryView.ShowInventory(_playerInventoryConfig.inventoryWidth, _playerInventoryConfig.inventoryHeight);
+        ShowItemsInInventory();
+    }
+    private void FillInventory()
+    {
+        int countOfItems = _database.CurrentSlot.gameSave.inventoryItemsData.Length;
+        _inventoryItems = new InventoryItem[countOfItems];
+
+        for (int i = 0; i < countOfItems; i++)
+        {
+            _inventoryItems[i] = _inventoryItemsFactory.Create(_database.CurrentSlot.gameSave.inventoryItemsData[i]);
+        }
+    }
+    private void ShowItemsInInventory()
+    {
+        for (int i = 0; i < _inventoryItems.Length; i++)
+        {
+            _inventoryView.AddItem(_inventoryItems[i]);
+        }
     }
     public void Close()
     {

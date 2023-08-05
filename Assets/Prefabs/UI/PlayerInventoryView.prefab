@@ -116,8 +116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellContent: {fileID: 1393491753954147505}
-  _cellPrefab: {fileID: 1977525713393521211, guid: 284cdbb952cf02e4092314159f50a06a,
+  _cellPrefab: {fileID: 1687459920922060465, guid: 284cdbb952cf02e4092314159f50a06a,
     type: 3}
+  _cellsRoot: {fileID: 1393491753954147518}
 --- !u!1 &1393491752895754632
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +293,6 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 1, y: 1}
+  m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 2

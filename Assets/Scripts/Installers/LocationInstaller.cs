@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -10,7 +7,7 @@ public class LocationInstaller : MonoInstaller
     [SerializeField] private HotWeapon _hotWeaponPrefab;
     [Header("Configs")]
     [SerializeField] private PlayerControlsConfig _playerControlsConfig;
-    [Header ("UI")]
+    [Header("UI")]
     [SerializeField] private InventoryView _inventoryViewPrefab;
 
 
@@ -35,6 +32,7 @@ public class LocationInstaller : MonoInstaller
     {
         Container.BindFactory<Player, PlayerFactory>().FromComponentInNewPrefab(_playerPrefab);
         Container.BindFactory<InventoryView, InventoryFactory>().FromComponentInNewPrefab(_inventoryViewPrefab);
+        Container.BindInterfacesTo<InventoryItemsFactory>().AsSingle();
     }
     private void BindPlayerHolder()
     {
@@ -65,6 +63,6 @@ public class LocationInstaller : MonoInstaller
     {
         Container.BindInterfacesTo<UIBuilder>().AsSingle();
     }
-    
+
 }
 
