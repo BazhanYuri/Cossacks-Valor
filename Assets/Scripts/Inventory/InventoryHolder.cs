@@ -27,6 +27,8 @@ public class InventoryHolder : IPlayerInventoryHolder, IInitializable
         {
             _playerInventory.Close();
             _playerInventory = null;
+            _playerInput.HideMouse();
+
             return;
         }
         _playerInventory = _uIBuilder.CreatePlayerInventory();

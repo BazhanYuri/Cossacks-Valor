@@ -80,6 +80,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d05dedb-dd45-4734-a5d9-488ba76f914f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -236,6 +245,17 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4d8af59-a8fe-4156-9ad0-58e3ff9662c2"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +270,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_ActionMap_Interact = m_ActionMap.FindAction("Interact", throwIfNotFound: true);
         m_ActionMap_Shoot = m_ActionMap.FindAction("Shoot", throwIfNotFound: true);
         m_ActionMap_Reload = m_ActionMap.FindAction("Reload", throwIfNotFound: true);
+        m_ActionMap_Jump = m_ActionMap.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +336,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_ActionMap_Interact;
     private readonly InputAction m_ActionMap_Shoot;
     private readonly InputAction m_ActionMap_Reload;
+    private readonly InputAction m_ActionMap_Jump;
     public struct ActionMapActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -325,6 +347,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_ActionMap_Interact;
         public InputAction @Shoot => m_Wrapper.m_ActionMap_Shoot;
         public InputAction @Reload => m_Wrapper.m_ActionMap_Reload;
+        public InputAction @Jump => m_Wrapper.m_ActionMap_Jump;
         public InputActionMap Get() { return m_Wrapper.m_ActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -352,6 +375,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Reload.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnReload;
+                @Jump.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_ActionMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -374,6 +400,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -386,5 +415,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }

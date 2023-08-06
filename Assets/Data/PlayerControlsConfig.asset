@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sideSpeed: 4
   forwardSpeed: 6
+  jumpForce: 4
+  jumpCooldown: 1
+  groundCheckDistance: 1
   mouseHorizontalSensitivity: 1
   mouseVerticalSensitivity: 0.5
   mouseVerticalClamp:

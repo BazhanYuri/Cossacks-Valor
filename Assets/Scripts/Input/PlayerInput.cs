@@ -7,6 +7,7 @@ public class PlayerInput : IPlayerInput, IInitializable
 {
     private PlayerInputAction _inputActions;
 
+    private bool _isInputBlocked = false;
 
     public event Action<Vector2> PlayerMoved;
     public event Action<Vector2> PlayerLooked;
@@ -14,6 +15,8 @@ public class PlayerInput : IPlayerInput, IInitializable
     public event Action InteractButtonPressed;
     public event Action ShootButtonPressed;
     public event Action ReloadButtonPressed;
+    public event Action JumpButtonPressed;
+
 
     public void Initialize()
     {
@@ -29,6 +32,7 @@ public class PlayerInput : IPlayerInput, IInitializable
         _inputActions.ActionMap.Interact.started += InvokeInteractButtonPressed;
         _inputActions.ActionMap.Shoot.started += InvokeShootButtonPressed;
         _inputActions.ActionMap.Reload.started += InvokeReloadButtonPressed;
+        _inputActions.ActionMap.Jump.started += InvokeJumpButtonPressed;
     }
 
     
@@ -42,29 +46,48 @@ public class PlayerInput : IPlayerInput, IInitializable
     }
     public void InvokePlayerMoved(Vector2 value)
     {
+        if (_isInputBlocked == true)
+        {
+            return;
+        }
         PlayerMoved?.Invoke(value);
     }
-    public void InvokePlayerLooked(Vector2 value)
+    private void InvokePlayerLooked(Vector2 value)
     {
+        if (_isInputBlocked == true)
+        {
+            return;
+        }
         PlayerLooked?.Invoke(value);
     }
 
-    public void InvokeInventoryPressed(InputAction.CallbackContext context)
+    private void InvokeInventoryPressed(InputAction.CallbackContext context)
     {
         InventoryButtonPressed?.Invoke();
     }
-
-    public void InvokeInteractButtonPressed(InputAction.CallbackContext context)
+    private void InvokeInteractButtonPressed(InputAction.CallbackContext context)
     {
+        if (_isInputBlocked == true)
+        {
+            return;
+        }
         InteractButtonPressed?.Invoke();
     }
-    public void InvokeShootButtonPressed(InputAction.CallbackContext context)
+    private void InvokeShootButtonPressed(InputAction.CallbackContext context)
     {
+        if (_isInputBlocked == true)
+        {
+            return;
+        }
         ShootButtonPressed?.Invoke();
     }
-    public void InvokeReloadButtonPressed(InputAction.CallbackContext context)
+    private void InvokeReloadButtonPressed(InputAction.CallbackContext context)
     {
         ReloadButtonPressed?.Invoke();
+    }
+    private void InvokeJumpButtonPressed(InputAction.CallbackContext context)
+    {
+        JumpButtonPressed?.Invoke();
     }
     private void OnMoved(InputAction.CallbackContext context)
     {
@@ -82,11 +105,13 @@ public class PlayerInput : IPlayerInput, IInitializable
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        _isInputBlocked = true;
     }
     private void BlockMouse()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        _isInputBlocked = false;
     }
 }
 
