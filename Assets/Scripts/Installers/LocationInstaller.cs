@@ -17,6 +17,7 @@ public class LocationInstaller : MonoInstaller
         BindFactories();
         BindPlayerHolder();
         BindInventoryHolder();
+        BindItemsDrugger();
         BindWeaponHandler();
         BindInput();
         BindMovement();
@@ -41,6 +42,10 @@ public class LocationInstaller : MonoInstaller
     private void BindInventoryHolder()
     {
         Container.BindInterfacesTo<InventoryHolder>().AsSingle();
+    }
+    private void BindItemsDrugger()
+    {
+        Container.BindInterfacesTo<ItemsDragger>().AsSingle();
     }
     private void BindWeaponHandler()
     {

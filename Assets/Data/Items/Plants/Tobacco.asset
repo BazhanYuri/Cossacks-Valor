@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tobacco
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: b7db57e819bd7874191f7e2e8a5c7911, type: 3}
+  prefab: {fileID: 1886890681005967744, guid: 2dc0e6d035c7bb947b48211c59f8d7d4, type: 3}
   weight: 1
   width: 1
   height: 1

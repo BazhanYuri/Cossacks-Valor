@@ -4,4 +4,5 @@
 public class ItemsConfigHolder : ScriptableObject
 {
     public ItemConfig[] items;
+    public RectTransform tempViewPrefab;
 }

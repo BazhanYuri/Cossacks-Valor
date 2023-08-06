@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2095a6d1be2aadb47846f8ddafe7921c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 1393491752646237825}
   _cellContent: {fileID: 1393491753954147505}
   _cellPrefab: {fileID: 1687459920922060465, guid: 284cdbb952cf02e4092314159f50a06a,
     type: 3}

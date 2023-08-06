@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Basil
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: ad16479edc80917418031f14b1da1cb0, type: 3}
+  prefab: {fileID: 1886890681005967744, guid: 2e5c7f12717ed2e4aa8f4046875c75af, type: 3}
   weight: 1
   width: 1
   height: 1

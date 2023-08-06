@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Mint
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 92ab50d46f193054d85f15342a1414a0, type: 3}
+  prefab: {fileID: 1886890681005967744, guid: 0fc4bc97cfdb76b40831137ac49877b1, type: 3}
   weight: 1
   width: 1
   height: 1

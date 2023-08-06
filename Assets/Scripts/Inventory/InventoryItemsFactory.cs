@@ -1,4 +1,6 @@
-﻿using Zenject;
+﻿using UnityEngine;
+using Zenject;
+
 
 public class InventoryItemsFactory : IInventoryItemFactory
 {
@@ -14,6 +16,14 @@ public class InventoryItemsFactory : IInventoryItemFactory
     {
         return new InventoryItem(GetItemConfig(itemData), itemData.xPos, itemData.yPos);
     }
+
+    public RectTransform CreateTempView(GameObject prefab)
+    {
+        RectTransform tempView = GameObject.Instantiate(prefab).GetComponent<RectTransform>();
+
+        return tempView;
+    }
+
     private ItemConfig GetItemConfig(InventoryItemData itemData)
     {
         return _itemsConfigHolder.items[itemData.index];

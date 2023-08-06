@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1977525713393521209}
   - component: {fileID: 1977525713393521208}
   - component: {fileID: 1687459920922060465}
+  - component: {fileID: 8120567822851217080}
   m_Layer: 5
   m_Name: ItemCellView
   m_TagString: Untagged
@@ -92,6 +93,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rectTransform: {fileID: 1977525713393521211}
   _itemIcon: {fileID: 776698650463788280}
+--- !u!114 &8120567822851217080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977525713393521210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &6077545996550805346
 GameObject:
   m_ObjectHideFlags: 0

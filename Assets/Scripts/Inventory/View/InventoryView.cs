@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class InventoryView : MonoBehaviour
 {
+    [SerializeField] private Canvas _canvas;
     [SerializeField] private GridLayoutGroup _cellContent;
     [SerializeField] private InventoryCell _cellPrefab;
     [SerializeField] private RectTransform _cellsRoot;
@@ -12,13 +13,13 @@ public class InventoryView : MonoBehaviour
     private int _height;
     private float _cellSize;
 
-
+    public Canvas Canvas { get => _canvas;}
 
     private void Awake()
     {
         _cellSize = _cellContent.cellSize.x;
     }
-    public void ShowInventory(int width, int height)
+    public void ShowInventory(int width, int height, IItemsDragger itemsDragger)
     {
         _width = width;
         _height = height;
@@ -32,7 +33,7 @@ public class InventoryView : MonoBehaviour
             {
                 var cell = Instantiate(_cellPrefab, _cellContent.transform);
                 cell.name = $"Cell {i}";
-                cell.Initialize(i, j);
+                cell.Initialize(i, j, itemsDragger);
                 _cells[pointer] = cell;
 
                 pointer++;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Thyme
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 0f061b4bd0275bc4eb60f2af31e7375a, type: 3}
+  prefab: {fileID: 1886890681005967744, guid: a3db5ba09f081f64cacff1ee4d2b97d2, type: 3}
   weight: 1
   width: 1
   height: 1

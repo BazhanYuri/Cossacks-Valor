@@ -23,7 +23,7 @@ using System;
             inventoryItemsData = new InventoryItemData[5];
             for (int i = 0; i < inventoryItemsData.Length; i++)
             {
-                inventoryItemsData[i] = new InventoryItemData(UnityEngine.Random.Range(0, 3), i, UnityEngine.Random.Range(0, 3));
+                inventoryItemsData[i] = new InventoryItemData(UnityEngine.Random.Range(0, 5), i, UnityEngine.Random.Range(0, 3));
             }
         }
     }
