@@ -18,7 +18,7 @@ public class PlayerHolder : IInitializable
 
     public void Initialize()
     {
-        _factory.Create();
+        _factory.Create().transform.position += new Vector3(0, 2, 0);
     }
 }
 public class Player : MonoBehaviour
