@@ -8,6 +8,7 @@ using Zenject;
 public class PlayerHolder : IInitializable
 {
     private PlayerFactory _factory;
+    private Transform _spawnPoint;
 
 
     [Inject]
@@ -15,10 +16,14 @@ public class PlayerHolder : IInitializable
     {
         _factory = playerFactory;
     }
-
+    public PlayerHolder(Transform spawnPoint)
+    {
+        _spawnPoint = spawnPoint;
+    }
     public void Initialize()
     {
-        _factory.Create().transform.position += new Vector3(0, 2, 0);
+        Player player = _factory.Create();
+        player.transform.position = _spawnPoint.position + new Vector3(0, 2, 0);
     }
 }
 public class Player : MonoBehaviour
@@ -46,8 +51,6 @@ public class Player : MonoBehaviour
         _playerInput = playerInput;
         _playerWeaponHandler = playerWeaponHandler;
     }
-
-
     private void Awake()
     {
         _playerMovement.SetPlayer(this);

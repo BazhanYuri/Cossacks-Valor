@@ -4,6 +4,7 @@ using Zenject;
 public class LocationInstaller : MonoInstaller
 {
     [SerializeField] private Player _playerPrefab;
+    [SerializeField] private Transform _playerSpawnPoint;
     [SerializeField] private HotWeapon _hotWeaponPrefab;
     [Header("Configs")]
     [SerializeField] private PlayerControlsConfig _playerControlsConfig;
@@ -31,13 +32,13 @@ public class LocationInstaller : MonoInstaller
     }
     private void BindFactories()
     {
-        Container.BindFactory<Player, PlayerFactory>().FromComponentInNewPrefab(_playerPrefab);
+        Container.BindFactory<Player, PlayerFactory>().FromComponentInNewPrefab(_playerPrefab).WithArguments(_playerSpawnPoint);
         Container.BindFactory<InventoryView, InventoryFactory>().FromComponentInNewPrefab(_inventoryViewPrefab);
         Container.BindInterfacesTo<InventoryItemsFactory>().AsSingle();
     }
     private void BindPlayerHolder()
     {
-        Container.BindInterfacesTo<PlayerHolder>().AsSingle();
+        Container.BindInterfacesTo<PlayerHolder>().AsSingle().WithArguments(_playerSpawnPoint);
     }
     private void BindInventoryHolder()
     {
