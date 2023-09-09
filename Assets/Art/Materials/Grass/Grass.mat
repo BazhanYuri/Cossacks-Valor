@@ -43,7 +43,7 @@ Material:
     - _QueueOffset: 0
     - _Scale: 0.2
     - _Smoothness: 0.558
-    - _Speed: 3
+    - _Speed: 1
     m_Colors:
     - _Albedo: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
   m_BuildTextureStacks: []
