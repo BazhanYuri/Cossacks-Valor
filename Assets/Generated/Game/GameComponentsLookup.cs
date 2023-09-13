@@ -9,17 +9,17 @@
 public static class GameComponentsLookup {
 
     public const int Health = 0;
-    public const int Health2 = 1;
+    public const int Position = 1;
 
     public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
         "Health",
-        "Health2"
+        "Position"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Health),
-        typeof(Health2)
+        typeof(Position)
     };
 }
